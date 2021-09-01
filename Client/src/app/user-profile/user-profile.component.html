@@ -1,0 +1,43 @@
+<div *ngIf="userDetails" style="text-align: center; margin-top: 20px;">
+  <h1>Hi, {{userDetails.fullName}} you can Edit your profile here:</h1>
+  <!-- Form to send to update user details -->
+  <form #updateForm="ngForm" (ngSubmit)="updateForm.valid && onSubmit(updateForm)">
+    <!-- Table for user details -->
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th colspan="2" class="text-center">User Profile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full Name</td>
+          <td> <input type="text" name="fullName" #fullName="ngModel" [(ngModel)]="model.fullName"
+              placeholder="{{userDetails.fullName}}" required
+              [ngClass]="{'invalid-textbox':updateForm.submitted &&!fullName.valid}"></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>
+            <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email"
+              placeholder="{{userDetails.email}}" [pattern]="emailRegex" required
+              [ngClass]="{'invalid-textbox':updateForm.submitted &&!email.valid}">
+              <div *ngIf="updateForm.submitted && email.errors?.pattern" style="color: red; font-size: 18px;text-align: center;">
+                <p>Invalid email address.</p>
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-center">
+            <input type="button" (click)="onLogout()" value="Logout">
+            <input type="submit" value="Update">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Alert SuccessMessage or not -->
+    <div class="alert" *ngIf="showSucessMessage">
+      {{updateMessage}}
+    </div>
+  </form>
+</div>
