@@ -13,10 +13,10 @@
   </div>
 
   <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Password"
-    required minlength="4" [ngClass]="{'invalid-textbox':signInForm.submitted &&!password.valid}">
+    required minlength="8" [ngClass]="{'invalid-textbox':signInForm.submitted &&!password.valid}">
 
   <div *ngIf="signInForm.submitted && password.errors?.minlength">
-    <label class="valdation-message">Minimun 4 characters.</label>
+    <label class="valdation-message">Minimun 8 characters.</label>
   </div>
   <input type="submit" value="Sign In">
 </form>
